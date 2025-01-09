@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark/Light Mode Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20%;
+        }
+        .toggle-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        .light-mode {
+            background-color: #FFFFFF;
+            color: black;
+        }
+        .dark-mode {
+            background-color: #333333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Dark/Light Mode App</h1>
+        <button id="modeToggle" class="toggle-button">Switch to Dark Mode</button>
+    </div>
+
+    <script>
+       
+        // Get the mode from sessionStorage (default to 'light' if not found)
+        let mode = sessionStorage.getItem('mode') || 'light';
+        const body = document.body;
+        const toggleButton = document.getElementById('modeToggle');
+
+        // Function to set the mode
+        function setMode(mode) {
+            if (mode === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                toggleButton.textContent = 'Switch to Light Mode';
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                toggleButton.textContent = 'Switch to Dark Mode';
+            }
+            // Store the mode in sessionStorage
+            sessionStorage.setItem('mode', mode);
+        }
+
+        // Initialize the mode based on the sessionStorage value
+        setMode(mode);
+
+        // Toggle the mode when the button is clicked
+        toggleButton.addEventListener('click', () => {
+            mode = (mode === 'light') ? 'dark' : 'light';
+            setMode(mode);
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce store</title>
+    <link rel="stylesheet" href="store2.css">
+</head>
+<body>
+    <div class="product-list">
+        <div class="product-card" data-name="iPhone 15plus" data-price="900" data-image="ip.jpeg" data-image-name=''>
+            <img src="ip.jpeg" alt="iPhone 13 Pro">
+            <h3>iPhone 15 plus</h3>
+            <p>900jd</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card" data-name="Headset" data-price="150" data-image="headphones.jpeg" data-image-name="">
+            <img src="headphones.jpeg" alt="Headset">
+            <h3>Headset</h3>
+            <p>150jd</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card" data-name="Keyboard" data-price="60" data-image="keyboard.jpeg" data-image-name="">
+            <img src="keyboard.jpeg" alt="Keyboard">
+            <h3>Keyboard</h3>
+            <p>60jd</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    
+
+    <div class="cart">
+        <h2>Cart</h2>
+        <div class="cart-items"></div>
+        <div class="total">
+            <p>Total: <span id="total-price">0</span>jd</p>
+        </div>
+        <button class="save">Save</button>
+    </div>
+   
+    <script src="store2.js"></script>
+</body>
+</html>

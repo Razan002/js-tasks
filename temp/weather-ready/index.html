@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="weather-side">
+          <div class="weather-gradient"></div>
+          <div class="date-container">
+            <h2 id="day" class="date-dayname"></h2><span class="date-day" id="date"></span><i class="location-icon" data-feather="map-pin"></i><span id="city" class="location"></span>
+          </div>
+          <div class="weather-container"><i class="weather-icon" data-feather="sun"></i>
+            <h1 id="temp" class="weather-temp"></h1>
+            <h3 id="description" class="weather-desc"></h3>
+          </div>
+        </div>
+        <div class="info-side">
+          <div class="today-info-container">
+            <div class="today-info">
+              <div class="precipitation"> <span class="title">PRESSURE</span><span id="PRESSURE" class="PRESSURE value"></span>
+                <div class="clear"></div>
+              </div>
+              <div class="humidity"> <span class="title">Humidity</span><span id="humidity" class="humidity-view"></span>
+                <div class="clear"></div>
+              </div>
+              <div class="wind"> <span class="title">Wind</span><span id="wind" class="wind-view"></span>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+          <div class="week-container">
+            <ul class="week-list">
+              <li class="active"><i class="day-icon" data-feather="sun"></i><span class="day-name">Tue</span><span class="day-temp">29°C</span></li>
+              <li><i class="day-icon" data-feather="cloud"></i><span class="day-name">Wed</span><span class="day-temp">21°C</span></li>
+              <li><i class="day-icon" data-feather="cloud-snow"></i><span class="day-name">Thu</span><span class="day-temp">08°C</span></li>
+              <li><i class="day-icon" data-feather="cloud-rain"></i><span class="day-name">Fry</span><span class="day-temp">19°C</span></li>
+              <div class="clear"></div>
+            </ul>
+          </div>
+          <div class="location-container">
+            <!-- <button class="location-button"> <i data-feather="map-pin"></i><span>Change location</span></button> -->
+            <select onchange="changeWeather()" id="selc" class="location-button listcity" >
+                <option value="Amman" selected > Amman </option>
+                <option value="Paris" > Paris </option>
+                <option value="London"> london </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    <script >
+     var q="amman";
+async function checkWeather(){
+
+    let apiurl =`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${q}&appid=a25a25335cdf8cf7ef7ce8e819c2f3b4` ;
+    //  to send request for openweatherapi
+    const response= await fetch(apiurl);
+    const data = await response.json();
+
+    const date = new Date(data.dt *1000);
+    const formattedDate =date.toLocaleDateString("en-US");
+
+    const days=["Sunday" ," Monday" , "Tuesday" ," wednesday" , "Thursday" ," Friday" ," saturday"];
+    document.getElementById("day").textContent=days[date.getDay()];
+    document.getElementById("date").textContent=formattedDate;
+    document.getElementById("city").textContent=data.name;
+    document.getElementById("wind").innerHTML = data.wind.speed + "km/h";
+    document.getElementById("PRESSURE").innerHTML = data.main.pressure +"hpa";
+    document.getElementById("humidity").innerHTML=data.main.humidity +"%"; 
+    document.getElementById("temp").innerHTML=Math.round(data.main.temp)+"°C";
+    document.getElementById("description").innerHTML=data.weather[0].description;
+
+}   
+
+checkWeather();
+
+function changeWeather(){
+    let selc = document.getElementById("selc");
+    if(selc.value == "Amman"){
+        q="amman";
+}else if (selc.value == "London"){
+    q="london";
+}else if (selc.value =="Paris"){
+    q="paris"
+}
+checkWeather()
+}
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
